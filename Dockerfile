@@ -20,6 +20,8 @@ RUN --mount=type=cache,target=/usr/local/cargo/registry,id=${TARGETPLATFORM} --m
 
 FROM gcr.io/distroless/static:nonroot
 
+ENV IMAGE_NAME=hello-rest
+
 WORKDIR /${IMAGE_NAME}
 
 # Copy our build
