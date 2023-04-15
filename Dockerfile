@@ -25,6 +25,10 @@ ENV IMAGE_NAME=hello-rest
 
 WORKDIR /${IMAGE_NAME}
 
+# Copy the missing files from the Rust image to the Distroless image
+COPY --from=build /usr/lib/x86_64-linux-gnu/libgcc_s.so.1 /usr/lib/x86_64-linux-gnu/
+COPY --from=build /usr/lib/x86_64-linux-gnu/libstdc++.so.6 /usr/lib/x86_64-linux-gnu/
+
 # Copy our build
 COPY --from=builder /root/${IMAGE_NAME} /${IMAGE_NAME}/${IMAGE_NAME}
 EXPOSE 8080
