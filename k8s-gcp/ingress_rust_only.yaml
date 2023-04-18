@@ -5,12 +5,13 @@ metadata:
   annotations:
     # If the class annotation is not specified it defaults to "gce".
     kubernetes.io/ingress.class: "gce"
+    # cloud.google.com/backend-config: '{"/hello": "hello-rest-backend-config"}'
 spec:
   rules:
   - http:
       paths:
       - path: /hello
-        pathType: ImplementationSpecific
+        pathType: Prefix
         backend:
           service:
             name: hello-rest-service

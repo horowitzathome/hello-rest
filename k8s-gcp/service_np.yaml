@@ -2,6 +2,9 @@ apiVersion: v1
 kind: Service
 metadata:
   name: hello-rest-service
+  annotations: 
+    cloud.google.com/backend-config: '{"default": "hello-rest-backend-config"}'
+    #cloud.google.com/backend-config: '{"/hello": "hello-rest-backend-config"}'
 spec:
   type: NodePort
   selector:
