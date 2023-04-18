@@ -66,7 +66,8 @@ fn create_router_with_prometheus(prometheus_layer: PrometheusMetricLayer<'static
         .route("/actuator/prometheus", routing::get(|| async move { metric_handle.render() }))
         .layer(prometheus_layer);
 
-    Router::new().nest("/hello", routers)
+    routers
+    //Router::new().nest("/hello", routers)
 }
 
 fn create_router() -> Router {
@@ -74,11 +75,15 @@ fn create_router() -> Router {
 
     Router::new()
         // Here the business routes later
-        .route("/dog", routing::get(listen::get_dog))
+        .route("/", routing::get(listen::root_root))
+        .route("/hello", routing::get(listen::root_hello))
+        .route("/hello/dog", routing::get(listen::get_dog))
+        .route("/dog", routing::get(listen::get_dog_root))
         //.layer(Extension(reader_deployment))
         .layer(tower_http::trace::TraceLayer::new_for_http())
         // Reminder: routes added *after* TraceLayer are not subject to its logging behavior
-        .route("/actuator/health", routing::get(listen::health))
+        .route("/actuator/health", routing::get(listen::health_root))
+        .route("/hello/actuator/health", routing::get(listen::health))
         .layer(cors)
 }
 
