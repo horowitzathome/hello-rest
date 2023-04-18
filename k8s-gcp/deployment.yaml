@@ -15,6 +15,8 @@ spec:
       containers:
       - name: hello-rest-container
         image: horowitzathome/hello-rest:latest-x86_64-unknown-linux-gnu
+        ports:
+        - containerPort: 8080
         env:
-        - name: "PORT"
+        - name: PORT
           value: "8080"
