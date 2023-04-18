@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hello-rest-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: hello-rest-app
+  template:
+    metadata:
+      labels:
+        app: hello-rest-app
+    spec:
+      containers:
+      - name: hello-rest-container
+        image: horowitzathome/hello-rest:latest-x86_64-unknown-linux-gnu
+        env:
+        - name: "PORT"
+          value: "8080"
