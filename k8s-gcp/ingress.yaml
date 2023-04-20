@@ -10,14 +10,14 @@ spec:
   - http:
       paths:
       - path: /cli
-        pathType: ImplementationSpecific
+        pathType: Prefix
         backend:
           service:
             name: reactcli-service
             port:
               number: 3000
       - path: /hello
-        pathType: ImplementationSpecific
+        pathType: Prefix
         backend:
           service:
             name: hello-rest-service
