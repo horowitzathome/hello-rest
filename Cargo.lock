@@ -472,7 +472,7 @@ checksum = "290f1a1d9242c78d09ce40a5e87e7554ee637af1351968159f4952f028f75604"
 
 [[package]]
 name = "hello-rest"
-version = "0.1.14"
+version = "0.1.15"
 dependencies = [
  "anyhow",
  "assert2",

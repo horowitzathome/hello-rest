@@ -16,11 +16,10 @@ jobs:
     uses: horowitzathome/rust-workflows/.github/workflows/test.yaml@main
   build:
     if: true
-    uses: horowitzathome/rust-workflows/.github/workflows/build_all.yaml@main
+    uses: horowitzathome/rust-workflows/.github/workflows/build_all_no_hadolint.yaml@main
     needs: test
     with:
       image: horowitzathome/hello-rest
-      hadolint-ignore: true
     secrets:
       container-registry-username: ${{ secrets.CONTAINER_REGISTRY_USERNAME }}
       container-registry-password: ${{ secrets.CONTAINER_REGISTRY_PASSWORD }}
