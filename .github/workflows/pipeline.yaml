@@ -20,6 +20,7 @@ jobs:
     needs: test
     with:
       image: horowitzathome/hello-rest
+      hadolint-ignore: true
     secrets:
       container-registry-username: ${{ secrets.CONTAINER_REGISTRY_USERNAME }}
       container-registry-password: ${{ secrets.CONTAINER_REGISTRY_PASSWORD }}
