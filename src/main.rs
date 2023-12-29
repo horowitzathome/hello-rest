@@ -10,13 +10,13 @@ pub type Result<T, E = anyhow::Error> = std::result::Result<T, E>;
 
 #[tokio::main]
 async fn main() -> Result<()> {
-    println!("Hello, db!");
+    println!("Hello, hello-rest!");
 
     // Tracing!
     register_tracing();
 
     // Now trace the started message
-    info!("Started Hello DB");
+    info!("Started hello-rest");
 
     // Metrics
     let (prometheus_layer, metric_handle) = define_metrics();
@@ -28,8 +28,14 @@ async fn main() -> Result<()> {
     let router = create_router_with_prometheus(prometheus_layer, metric_handle);
 
     // Start Web Server at port 8080
-    use tokio::signal::unix as usig;
-    let mut shutdown = usig::signal(usig::SignalKind::terminate())?;
+    //use tokio::signal::unix as usig;
+    //let mut shutdown = usig::signal(usig::SignalKind::terminate())?;
+
+    let listener = tokio::net::TcpListener::bind("0.0.0.0:8081").await.unwrap();
+    axum::serve(listener, router).await.unwrap();
+
+
+    /* 
     let server = axum::Server::bind(&std::net::SocketAddr::from(([0, 0, 0, 0], 8080)))
         .serve(router.into_make_service())
         .with_graceful_shutdown(async move {
@@ -39,7 +45,7 @@ async fn main() -> Result<()> {
     // Wait for either Watcher or WebServer to exit and write log hwo exited (the Watcher should never exit by its own)
     tokio::select! {
         _ = server => info!("axum server exited"),
-    }
+    }*/
 
     // Finish
     Ok(())
